@@ -7,10 +7,18 @@
     "test": "npm run test:html",
     "test:html": "glob-run nu-html-checker *.html",
     
-    "build": "npm run build:sass && npm run build:utoprefixer && npm run test",
+    "build": "npm run build:clean && npm run build:sass && npm run build:autoprefixer && npm run test",
     "build:sass": "sass --sourcemap=none --update sass:css",
-    "build:auoprefixer": "autoprefixer-cli css/styl.css",
+    "build:autoprefixer": "autoprefixer-cli css/styl.css",
+    "build:clean": "rimraf -rf css/",
     
+    "watch": "parallelshell \"npm run watch:sass\" \"npm run watch:autoprefixer\" \" npm run watch:browsersync\" ",
+    "watch2": "parallelshell \"npm run watch:onchangesassprefixer\" \"npm run watch:browsersync\" ",
+    "watch:browsersync": "browser-sync start --server --files \"css/*.css\" \"*.html\" ",
+    "watch:sass": "sass --watch sass:css",
+    "watch:autoprefixer": "onchange -d 100 css/styl.css -- autoprefixer-cli -o css/styl.prefixed.css css/styl.css",
+    "watch:sassprefixer": "sass --sourcemap=none --update sass:css && autoprefixer-cli -o css/styl.css css/styl.css",
+    "watch:onchangesassprefixer": "onchange -d 100 sass/*.scss -- watch:sassprefixer"
   },
   "repository": {
     "type": "git",
@@ -26,6 +34,9 @@
   "dependencies": {
     "autoprefixer-cli": "^1.0.0",
     "browser-sync": "^2.18.13",
-    "nu-html-checker": "^0.1.0"
+    "nu-html-checker": "^0.1.0",
+    "onchange": "^3.2.1",
+    "parallelshell": "^3.0.2",
+    "rimraf": "^2.6.2"
   }
 }
