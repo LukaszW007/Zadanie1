@@ -1,0 +1,31 @@
+{
+  "name": "Zadanie1",
+  "version": "1.0.0",
+  "description": "https://lukaszw007.github.io/Zadanie1/",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test:html",
+    "test:html": "glob-run nu-html-checker *.html",
+    
+    "build": "npm run build:sass && npm run build:utoprefixer && npm run test",
+    "build:sass": "sass --sourcemap=none --update sass:css",
+    "build:auoprefixer": "autoprefixer-cli css/styl.css",
+    
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LukaszW007/Zadanie1.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LukaszW007/Zadanie1/issues"
+  },
+  "homepage": "https://github.com/LukaszW007/Zadanie1#readme",
+  "dependencies": {
+    "autoprefixer-cli": "^1.0.0",
+    "browser-sync": "^2.18.13",
+    "nu-html-checker": "^0.1.0"
+  }
+}
